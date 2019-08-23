@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>Utrecht in 3D</title>
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<script src="./scripts/mapbox-gl.js"></script>
+	<link rel="stylesheet" type="text/css" href="./styles/mapbox-gl.css">
+	<script src="./scripts/three.min.js"></script>
+	<script src="./scripts/GLTFLoader.js"></script>
+	<script src="./scripts/Mapbox3DTiles.js"></script>
+	<script src="./scripts/apikeys.js"></script>
+	<style>
+		body { margin:0; padding:0; }
+		#map { position:absolute; top:0; bottom:0; width:100%; }
+		#controls { position:absolute; top:0; left:0; }
+	</style>
+</head>
+<body>
+<div id='map'></div>
+
+<script>
+mapboxgl.accessToken = apiKeys.mapboxAccessToken;
+
+const urlParams = new URLSearchParams(window.location.search);
+
+// Load the mapbox map
+var map = new mapboxgl.Map({
+	container: 'map',
+	style: 'mapbox://styles/mapbox/dark-v10?optimize=true',
+	center: [5.11533375, 52.08736203],
+	zoom: 14.3,
+	bearing: 0,
+	pitch: 45,
+	hash: true
+});
+
+map.on('style.load', function() {
+	let tileslayer = new Mapbox3DTiles.Layer( { 
+		id: 'utrecht', 
+		url: './tiles/tileset.json'
+	} );
+	map.addLayer(tileslayer, 'waterway-label');
+
+});
+</script>
+
+</body>
+</html>
