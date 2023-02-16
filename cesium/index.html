@@ -41,6 +41,19 @@
     viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0, -0.5, 0));
     viewer.scene.primitives.add(tileset);
     var handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);
+    var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+handler.setInputAction(function(movement) {
+  var worldPosition = viewer.scene.pickPosition(movement.position);
+  var carto = Cesium.Cartographic.fromCartesian(worldPosition);
+  viewer.camera.flyTo({
+    destination: new Cesium.Cartesian3.fromRadians(
+      carto.longitude,
+      carto.latitude,
+      100000
+    ),  
+  });
+}, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
     handler.setInputAction(function(movement) {
       var feature = viewer.scene.pick(movement.position);
       if (!Cesium.defined(feature)) {
