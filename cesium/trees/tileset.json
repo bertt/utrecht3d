@@ -16,8 +16,9 @@
       "uri": "content/{level}_{x}_{y}.cmpt"
     },
     "implicitTiling": {
+      "availableLevels": 7,
       "subdivisionScheme": "QUADTREE",
-      "subtreeLevels": 7,
+      "subtreeLevels": 4,
       "subtrees": {
         "uri": "subtrees/{level}_{x}_{y}.subtree"
       }
