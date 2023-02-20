@@ -1,0 +1,30 @@
+{
+  "root": {
+    "geometricError": 100.0,
+    "refine": "ADD",
+    "boundingVolume": {
+      "region": [
+        0.08684,
+        0.90806,
+        0.09067,
+        0.90998,
+        0.0,
+        50.0
+      ]
+    },
+    "content": {
+      "uri": "content/{level}_{x}_{y}.cmpt"
+    },
+    "implicitTiling": {
+      "subdivisionScheme": "QUADTREE",
+      "subtreeLevels": 7,
+      "subtrees": {
+        "uri": "subtrees/{level}_{x}_{y}.subtree"
+      }
+    }
+  },
+  "asset": {
+    "generator": "i3dm.export 2.3.2.0",
+    "version": "1.1"
+  }
+}
