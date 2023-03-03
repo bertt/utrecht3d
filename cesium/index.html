@@ -20,9 +20,22 @@
             top: 5px;
             left: 5px;
         }
+
+        #legend {
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          background: rgba(42, 42, 42, 0.8);
+          padding: 5px 8px;
+          border-radius: 5px;
+          z-index: 10          
+        }
   </style>
 </head>
 <body>
+  <div id="legend">
+    <img src="legend.png" alt="legend" class="image">
+  </div>
   <div id="cesiumContainer"></div>
   <script>
     // Cesium.ExperimentalFeatures.enableModelExperimental;
@@ -30,16 +43,37 @@
     var viewer = new Cesium.Viewer('cesiumContainer', {
       // terrainProvider : Cesium.createWorldTerrain()
     });
-    viewer.scene.debugShowFramesPerSecond = true;
-    var tilesetBuildings = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+    var buildings = new Cesium.Cesium3DTileset({
         url : './buildings/tileset.json'
-    }));
+    });
+
+    buildings.style = new Cesium.Cesium3DTileStyle({
+      color: {
+        conditions: [
+        ["${feature['bouwjaar']} < 1700", "color('#430719')"],
+        ["${feature['bouwjaar']} >= 1700 && ${feature['bouwjaar']} < 1750", "color('#740320')"],
+        ["${feature['bouwjaar']} >= 1750 && ${feature['bouwjaar']} < 1800", "color('#a50026')"],
+        ["${feature['bouwjaar']} >= 1800 && ${feature['bouwjaar']} < 1850", "color('#d73027')"],
+        ["${feature['bouwjaar']} >= 1850 && ${feature['bouwjaar']} < 1900", "color('#f46d43')"],
+        ["${feature['bouwjaar']} >= 1900 && ${feature['bouwjaar']} < 1925", "color('#fdae61')"],
+        ["${feature['bouwjaar']} >= 1925 && ${feature['bouwjaar']} < 1950", "color('#FEE090')"],
+        ["${feature['bouwjaar']} >= 1950 && ${feature['bouwjaar']} < 1975", "color('#84c7db')"],
+        ["${feature['bouwjaar']} >= 1975 && ${feature['bouwjaar']} < 2000", "color('#5096c2')"],
+        ["${feature['bouwjaar']} >= 2000 && ${feature['bouwjaar']} < 2015", "color('#1d66aa')"],
+        ["${feature['bouwjaar']} >= 2015 && ${feature['bouwjaar']} < 2030", "color('#117c3c')"],
+        ]
+      }
+    }
+  );
+
+    viewer.scene.debugShowFramesPerSecond = true;
+    var tilesetBuildings = viewer.scene.primitives.add(buildings);
     var tilesetTrees = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
         url : './trees/tileset.json'
     }));
 
 
-    //tileset.debugShowBoundingVolume = true;
+    // tileset.debugShowBoundingVolume = true;
     // tileset.debugColorizeTiles = true;
     viewer.scene.globe.depthTestAgainstTerrain = true;
 
