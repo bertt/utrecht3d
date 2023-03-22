@@ -44,7 +44,7 @@
     }
   },
   "asset": {
-    "generator": "pg2b3dm 1.4.2.0",
+    "generator": "pg2b3dm 1.5.0.0",
     "version": "1.0"
   }
 }
