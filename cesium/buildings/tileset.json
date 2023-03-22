@@ -35,9 +35,9 @@
       "uri": "content/{level}_{x}_{y}.b3dm"
     },
     "implicitTiling": {
-      "availableLevels": 9,
+      "availableLevels": 7,
       "subdivisionScheme": "QUADTREE",
-      "subtreeLevels": 5,
+      "subtreeLevels": 4,
       "subtrees": {
         "uri": "subtrees/{level}_{x}_{y}.subtree"
       }
